@@ -1,6 +1,9 @@
 class Product < ApplicationRecord
   include Fae::BaseModelConcern
 
+  validates :title, presence: true, uniqueness: true
+  validates :price, presence: true
+
   def fae_display_field
     title
   end
