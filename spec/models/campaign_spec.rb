@@ -14,4 +14,9 @@ RSpec.describe Campaign do
     campaign.body = nil
     expect(campaign).to_not be_valid
   end
+
+  it 'has many clients' do
+    association = described_class.reflect_on_association(:clients)
+    expect(association.macro).to eq(:has_many)
+  end
 end
