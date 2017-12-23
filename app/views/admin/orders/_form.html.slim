@@ -12,3 +12,6 @@
     = fae_pulldown f, :status, size: 'long', 
                       collection: Order.statuses.to_a, 
                       selected: Order.statuses[@item.status]
+
+    = fae_association f, :products
+    = fae_association f, :services
