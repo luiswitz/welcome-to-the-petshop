@@ -35,6 +35,5 @@ module Fae
         # scaffold inject marker
       ]
     end
-
   end
 end

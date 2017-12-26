@@ -1,7 +1,5 @@
 Fae.setup do |config|
-
   config.devise_secret_key = '970046c70a2d125fc2ab3e0455d0a63e81400f96acd70e3db3d44b8bed4af05a68e7dfb1903e2cebf495cc1a760f417155e75477f401c2258b89978db43b030c'
-
 
   ## devise_mailer_sender
   # This email address will get passed to Devise and

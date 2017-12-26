@@ -9,6 +9,4 @@ class Service < ApplicationRecord
   end
 
   has_fae_image :hero_image
-
-
 end

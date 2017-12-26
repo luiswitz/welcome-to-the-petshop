@@ -10,6 +10,5 @@ class Product < ApplicationRecord
 
   has_fae_image :hero_image
 
-
   belongs_to :supplier
 end

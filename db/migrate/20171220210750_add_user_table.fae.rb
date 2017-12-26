@@ -3,8 +3,8 @@ class AddUserTable < ActiveRecord::Migration
   def change
     create_table(:fae_users) do |t|
       ## Database authenticatable
-      t.string :email,              :null => false, :default => ""
-      t.string :encrypted_password, :null => false, :default => ""
+      t.string :email,              null: false, default: ''
+      t.string :encrypted_password, null: false, default: ''
 
       ## Recoverable
       t.string   :reset_password_token
@@ -14,7 +14,7 @@ class AddUserTable < ActiveRecord::Migration
       t.datetime :remember_created_at
 
       ## Trackable
-      t.integer  :sign_in_count, :default => 0, :null => false
+      t.integer  :sign_in_count, default: 0, null: false
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
@@ -27,7 +27,7 @@ class AddUserTable < ActiveRecord::Migration
       t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## Lockable
-      t.integer  :failed_attempts, :default => 0, :null => false # Only if lock strategy is :failed_attempts
+      t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       t.string   :unlock_token # Only if unlock strategy is :email or :both
       t.datetime :locked_at
 
@@ -41,10 +41,10 @@ class AddUserTable < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :fae_users, :email,                :unique => true
-    add_index :fae_users, :reset_password_token, :unique => true
-    add_index :fae_users, :confirmation_token,   :unique => true
-    add_index :fae_users, :unlock_token,         :unique => true
+    add_index :fae_users, :email,                unique: true
+    add_index :fae_users, :reset_password_token, unique: true
+    add_index :fae_users, :confirmation_token,   unique: true
+    add_index :fae_users, :unlock_token,         unique: true
     add_index :fae_users, :role_id
   end
 end

@@ -29,5 +29,4 @@ RSpec.describe Supplier do
     supplier2 = supplier.dup
     expect(supplier2).to_not be_valid
   end
-
 end

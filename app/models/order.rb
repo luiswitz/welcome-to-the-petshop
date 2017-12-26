@@ -13,12 +13,32 @@ class Order < ApplicationRecord
 
   validates :client, presence: true
 
+  before_save :set_total
+
   def fae_display_field
-    id  
+    id
   end
 
   def self.for_fae_index
     order(:id)
   end
 
+  private
+
+  def set_total
+    self.total = products.map(&:price).inject(0, :+)
+    self.total += services.map(&:price).inject(0, :+)
+
+    apply_discount_to_total
+  end
+
+  def apply_discount_to_total
+    if discount.present?
+      if discount.value > self.total
+        self.total = 0
+      else
+        self.total -= discount.value
+      end
+    end
+  end
 end

@@ -1,6 +1,6 @@
 class Campaign < ApplicationRecord
   include Fae::BaseModelConcern
-  
+
   has_many :campaign_clients
   has_many :clients, through: :campaign_clients
 
@@ -10,6 +10,4 @@ class Campaign < ApplicationRecord
   def fae_display_field
     title
   end
-
-
 end

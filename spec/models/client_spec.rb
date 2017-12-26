@@ -24,5 +24,4 @@ RSpec.describe Client do
     client2 = client.dup
     expect(client2).to_not be_valid
   end
-
 end

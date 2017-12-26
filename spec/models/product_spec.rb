@@ -4,9 +4,9 @@ RSpec.describe Product do
   let(:supplier) do
     Supplier.create(
       name: 'the-supplier',
-      email: 'supplier@mail.com', 
+      email: 'supplier@mail.com',
       phone: '9999999'
-    ) 
+    )
   end
 
   let(:product) do
@@ -33,5 +33,4 @@ RSpec.describe Product do
     product.price = nil
     expect(product).to_not be_valid
   end
-
 end
