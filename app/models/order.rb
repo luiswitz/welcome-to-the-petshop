@@ -13,6 +13,8 @@ class Order < ApplicationRecord
 
   validates :client, presence: true
 
+  before_save :set_total
+
   def fae_display_field
     id  
   end
@@ -21,4 +23,22 @@ class Order < ApplicationRecord
     order(:id)
   end
 
+  private
+
+  def set_total
+    self.total = self.products.map(&:price).inject(0, :+)
+    self.total += self.services.map(&:price).inject(0, :+)
+
+    apply_discount_to_total
+  end
+
+  def apply_discount_to_total
+    if self.discount.present?
+      if self.discount.value > self.total
+        self.total = 0
+      else
+        self.total -= self.discount.value
+      end
+    end
+  end
 end

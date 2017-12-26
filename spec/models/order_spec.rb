@@ -10,35 +10,87 @@ RSpec.describe Order do
     )
   end
 
-  let(:order) do
-    Order.create(
-      total: 199,
-      client: client
+  let(:product) do
+    Product.create(
+      title: 'the-title',
+      description: 'the-description',
+      price: 10.0,
+      observations: 'the-obsercations'
     )
   end
 
-  it 'is not valid without a client' do
-    order.client = nil
-    expect(order).to_not be_valid
+  let(:service) do
+    Service.create(
+      title: 'the-title',
+      description: 'the-description',
+      price: 15.0,
+      observations: 'the-obsercations'
+    )
   end
 
-  it 'belogns to a discount' do
-    association = described_class.reflect_on_association(:discount)
-    expect(association.macro).to eq(:belongs_to)
+  let(:discount) do
+    Discount.create(
+      title: 'the-discount',
+      value: 5.0
+    )
   end
 
-  it 'belongs to a client' do
-    association = described_class.reflect_on_association(:client)
-    expect(association.macro).to eq(:belongs_to)
+  let(:order) do
+    Order.create(
+      client: client,
+      products: [product],
+      services: [service]
+    )
   end
 
-  it 'has many products' do
-    association = described_class.reflect_on_association(:products)
-    expect(association.macro).to eq(:has_many)
+  describe 'validations' do
+    it 'is not valid without a client' do
+      order.client = nil
+      expect(order).to_not be_valid
+    end
   end
 
-  it 'has many services' do
-    association = described_class.reflect_on_association(:services)
-    expect(association.macro).to eq(:has_many)
+  describe 'associations' do
+    it 'belogns to a discount' do
+      association = described_class.reflect_on_association(:discount)
+      expect(association.macro).to eq(:belongs_to)
+    end
+
+    it 'belongs to a client' do
+      association = described_class.reflect_on_association(:client)
+      expect(association.macro).to eq(:belongs_to)
+    end
+
+    it 'has many products' do
+      association = described_class.reflect_on_association(:products)
+      expect(association.macro).to eq(:has_many)
+    end
+
+    it 'has many services' do
+      association = described_class.reflect_on_association(:services)
+      expect(association.macro).to eq(:has_many)
+    end
+  end
+
+  describe '#set_total' do
+    it 'sums the value of services and products from a order' do
+      expect(order.total).to eq(25.0)
+    end
+  end
+
+  describe '#apply_discount_to_total' do
+    it 'applies the discount' do
+      order.discount = discount
+      order.send(:apply_discount_to_total)
+
+      expect(order.total).to eq(20.0)
+    end
+
+    it 'applies a discount bigger than the total' do
+      order.discount = Discount.new(title: 'the-discount', value: 50)
+      order.send(:apply_discount_to_total)
+
+      expect(order.total).to eq(0)
+    end
   end
 end
