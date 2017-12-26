@@ -16,7 +16,7 @@ class Order < ApplicationRecord
   before_save :set_total
 
   def fae_display_field
-    id  
+    id
   end
 
   def self.for_fae_index
@@ -26,18 +26,18 @@ class Order < ApplicationRecord
   private
 
   def set_total
-    self.total = self.products.map(&:price).inject(0, :+)
-    self.total += self.services.map(&:price).inject(0, :+)
+    self.total = products.map(&:price).inject(0, :+)
+    self.total += services.map(&:price).inject(0, :+)
 
     apply_discount_to_total
   end
 
   def apply_discount_to_total
-    if self.discount.present?
-      if self.discount.value > self.total
+    if discount.present?
+      if discount.value > self.total
         self.total = 0
       else
-        self.total -= self.discount.value
+        self.total -= discount.value
       end
     end
   end

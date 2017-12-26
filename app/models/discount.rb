@@ -7,6 +7,4 @@ class Discount < ApplicationRecord
   def fae_display_field
     title
   end
-
-
 end

@@ -2,7 +2,6 @@ module Fae
   module AuthorizationConcern
     extend ActiveSupport::Concern
     module ClassMethods
-
       # Use the access_map to define any controllers that need any special authorization
       # Fae comes with three default roles:
       # - super admin: CRUD all objects, INCLUDING users and root settings
@@ -21,7 +20,6 @@ module Fae
       def access_map
         {}
       end
-
     end
   end
 end

@@ -24,5 +24,4 @@ RSpec.describe Service do
     service.price = nil
     expect(service).to_not be_valid
   end
-
 end
