@@ -1,11 +1,11 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe MarketingMailer, type: :mailer do
   describe '#campaign' do
     let(:mail) do
       MarketingMailer.campaign(
-        client: Client.new(email: 'the-email'), 
-        title: 'the-title', 
+        client: Client.new(email: 'the-email'),
+        title: 'the-title',
         body: 'the-body'
       )
     end
@@ -19,5 +19,4 @@ RSpec.describe MarketingMailer, type: :mailer do
       expect(mail.body.encoded).to match('the-body')
     end
   end
-
 end
