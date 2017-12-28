@@ -35,7 +35,7 @@ RSpec.describe Order do
     )
   end
 
-  let(:order) do
+  let!(:order) do
     Order.create(
       client: client,
       products: [product],
@@ -91,6 +91,16 @@ RSpec.describe Order do
       order.send(:apply_discount_to_total)
 
       expect(order.total).to eq(0)
+    end
+  end
+
+  describe 'dependent destroy' do
+    it 'destroy related products' do
+      expect { order.destroy }.to change { OrderProduct.count }.by(-1)
+    end
+
+    it 'destroy related services' do
+      expect { order.destroy }.to change { OrderService.count }.by(-1)
     end
   end
 end
