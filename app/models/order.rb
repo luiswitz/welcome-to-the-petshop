@@ -6,10 +6,10 @@ class Order < ApplicationRecord
   belongs_to :client
 
   has_many :order_products
-  has_many :products, through: :order_products
+  has_many :products, through: :order_products, dependent: :destroy
 
   has_many :order_services
-  has_many :services, through: :order_services
+  has_many :services, through: :order_services, dependent: :destroy
 
   validates :client, presence: true
 
