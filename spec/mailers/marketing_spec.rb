@@ -4,9 +4,9 @@ RSpec.describe MarketingMailer, type: :mailer do
   describe '#campaign' do
     let(:mail) do
       MarketingMailer.campaign(
-        client: Client.new(email: 'the-email'),
-        title: 'the-title',
-        body: 'the-body'
+        Client.new(email: 'the-email'),
+        'the-title',
+        'the-body'
       )
     end
 

@@ -1,5 +1,5 @@
 class MarketingMailer < ApplicationMailer
-  def campaign(client:, title:, body:)
+  def campaign(client, title, body)
     @body = body
 
     mail to: client.email, subject: title
