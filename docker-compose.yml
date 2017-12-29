@@ -20,7 +20,7 @@ services:
       - 'redis'
       - 'app'
     build: .
-    command: bash start_jobs
+    command: bash start_jobs.sh
     volumes:
       - '.:/petshop'
     volumes_from:
