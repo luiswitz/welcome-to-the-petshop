@@ -23,6 +23,11 @@ RSpec.describe Client do
       association = described_class.reflect_on_association(:campaigns)
       expect(association.macro).to eq(:has_many)
     end
+
+    it 'has many addresses' do
+      association = described_class.reflect_on_association(:addresses)
+      expect(association.macro).to eq(:has_many)
+    end
   end
 
   describe 'validations' do
