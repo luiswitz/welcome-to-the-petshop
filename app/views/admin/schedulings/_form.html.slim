@@ -4,8 +4,9 @@
   == render 'fae/shared/errors'
 
   main.content
-    = fae_input f, :date
+    = fae_pulldown f, :status, collection: Scheduling.statuses.map { |s| s[0] }
+    = fae_datepicker f, :date
     = fae_input f, :time
-    = fae_input f, :status
 
     = fae_association f, :client
+    = fae_association f, :services
