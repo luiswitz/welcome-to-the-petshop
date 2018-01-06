@@ -1,0 +1,12 @@
+= simple_form_for(['admin', @item]) do |f|
+  header.content-header.js-content-header
+    == render 'fae/shared/form_header', header: @klass_name
+  == render 'fae/shared/errors'
+
+  main.content
+    = fae_pulldown f, :status, collection: Scheduling.statuses.map { |s| s[0] }
+    = fae_datepicker f, :date
+    = fae_input f, :time
+
+    = fae_association f, :client
+    = fae_association f, :services

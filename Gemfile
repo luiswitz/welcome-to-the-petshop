@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'cocoon'
 gem 'coffee-rails', '~> 4.2'
 gem 'fae-rails'
 gem 'jbuilder', '~> 2.5'
@@ -17,7 +18,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-gem 'cocoon'
 
 group :development, :test do
   gem 'byebug', platform: :mri
