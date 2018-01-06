@@ -1,6 +1,8 @@
 class Scheduling < ApplicationRecord
   include Fae::BaseModelConcern
 
+  enum status: { scheduled: 1, finished: 2, canceled: 3 }
+
   belongs_to :client
   has_many :scheduling_services
   has_many :services, through: :scheduling_services
