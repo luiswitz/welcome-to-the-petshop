@@ -14,4 +14,8 @@ class Scheduling < ApplicationRecord
     
   end
 
+  def self.for_fae_index
+    order(:date)
+  end
+
 end
