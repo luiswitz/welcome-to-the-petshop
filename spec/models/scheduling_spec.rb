@@ -27,7 +27,7 @@ RSpec.describe Scheduling, type: :model do
 
   describe 'validations' do
     it 'is not valid without a client' do
-      scheduling.client = nil  
+      scheduling.client = nil
       expect(scheduling).to_not be_valid
     end
 
@@ -35,7 +35,7 @@ RSpec.describe Scheduling, type: :model do
       scheduling.date = nil
       expect(scheduling).to_not be_valid
     end
-    
+
     it 'is not valid without a time' do
       scheduling.time = nil
       expect(scheduling).to_not be_valid

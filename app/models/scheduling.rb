@@ -12,12 +12,9 @@ class Scheduling < ApplicationRecord
   validates :time, presence: true
   validates :services, presence: true
 
-  def fae_display_field
-    
-  end
+  def fae_display_field; end
 
   def self.for_fae_index
     order(:date)
   end
-
 end
