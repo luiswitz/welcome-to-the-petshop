@@ -1,0 +1,2 @@
+class SchedulingMailer < ApplicationMailer
+end
