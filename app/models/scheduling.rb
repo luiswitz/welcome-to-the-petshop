@@ -12,9 +12,17 @@ class Scheduling < ApplicationRecord
   validates :time, presence: true
   validates :services, presence: true
 
+  after_save :send_email
+
   def fae_display_field; end
 
   def self.for_fae_index
     order(:date)
+  end
+
+  private
+
+  def send_email
+    SchedulingJob.perform_now(self)
   end
 end
