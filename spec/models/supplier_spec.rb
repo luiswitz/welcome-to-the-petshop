@@ -1,14 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Supplier do
-  let(:supplier) do
-    Supplier.create(
-      name: 'the-name',
-      email: 'the@email.com',
-      observations: 'the-observations',
-      phone: '99999999'
-    )
-  end
+  let(:supplier) { create(:supplier) }
 
   it 'is not valid without a name' do
     supplier.name = nil
