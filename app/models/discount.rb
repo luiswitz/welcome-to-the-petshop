@@ -1,7 +1,7 @@
 class Discount < ApplicationRecord
   include Fae::BaseModelConcern
 
-  enum kind: { money: 1, percentual: 2 }
+  enum kind: [:money, :percentual]
 
   validates :title, presence: true, uniqueness: true
   validates :value, presence: true, uniqueness: true
