@@ -20,8 +20,8 @@ RSpec.describe Discount do
     expect(discount).to_not be_valid
   end
 
-  it 'can have a duplicated value' do
-    discount2 = discount.dup
-    expect(discount2).to_not be_valid
+  it 'is not valid withou a kind' do
+    discount.kind = nil
+    expect(discount).to_not be_valid
   end
 end

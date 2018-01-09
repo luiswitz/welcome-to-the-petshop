@@ -34,11 +34,25 @@ class Order < ApplicationRecord
 
   def apply_discount_to_total
     if discount.present?
-      if discount.value > self.total
-        self.total = 0
+      if discount.money?
+        apply_money_discount
       else
-        self.total -= discount.value
+        apply_percentual_discount
       end
     end
+  end
+
+  def apply_money_discount
+    if discount.value > self.total
+      self.total = 0
+    else
+      self.total -= discount.value
+    end
+  end
+
+  def apply_percentual_discount
+    convert_to_money = self.total * (discount.value / 100)
+    self.total = self.total - convert_to_money
+    self.total = 0 if self.total < 0
   end
 end
