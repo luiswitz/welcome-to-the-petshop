@@ -31,7 +31,16 @@ RSpec.describe Order do
   let(:discount) do
     Discount.create(
       title: 'the-discount',
+      kind: :money,
       value: 5.0
+    )
+  end
+
+  let(:percentual_discount) do
+    Discount.create(
+      title: 'the-percentual-discount',
+      kind: :percentual,
+      value: 50.0
     )
   end
 
@@ -79,18 +88,37 @@ RSpec.describe Order do
   end
 
   describe '#apply_discount_to_total' do
-    it 'applies the discount' do
-      order.discount = discount
-      order.send(:apply_discount_to_total)
+    context 'money discount' do
+      it 'applies the discount' do
+        order.discount = discount
+        order.send(:apply_discount_to_total)
 
-      expect(order.total).to eq(20.0)
+        expect(order.total).to eq(20.0)
+      end
+
+      it 'applies a discount bigger than the total' do
+        order.discount = Discount.new(title: 'the-discount', value: 50)
+        order.send(:apply_discount_to_total)
+
+        expect(order.total).to eq(0)
+      end
     end
 
-    it 'applies a discount bigger than the total' do
-      order.discount = Discount.new(title: 'the-discount', value: 50)
-      order.send(:apply_discount_to_total)
+    context 'percentual discount' do
+      it 'applies the discount' do
+        order.discount = percentual_discount
+        order.send(:apply_discount_to_total)
 
-      expect(order.total).to eq(0)
+        expect(order.total).to eq(12.5)
+      end
+
+      it 'calculates a discount bigger than the value' do
+        percentual_discount.value = 200
+        order.discount = percentual_discount
+        order.send(:apply_discount_to_total)
+
+        expect(order.total).to eq(0)
+      end
     end
   end
 
