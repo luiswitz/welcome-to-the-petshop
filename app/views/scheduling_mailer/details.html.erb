@@ -1,0 +1,10 @@
+Hi <%= @scheduling.client.name %>!
+
+Your scheduling on <%= @scheduling.date %> at <%= @scheduling.time %>
+was scheduled with success
+
+Here are the scheduled services for you:
+
+<% @scheduling.services.each do |service| %>
+  - <%= service.title %> <br>
+<% end %>
