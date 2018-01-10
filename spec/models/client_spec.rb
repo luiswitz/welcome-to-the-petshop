@@ -1,22 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Client do
-  let(:campaign) do
-    Campaign.create(
-      title: 'the-title',
-      body: 'the-body'
-    )
-  end
-
-  let!(:client) do
-    Client.create(
-      name: 'the-name',
-      email: 'the@email.com',
-      observations: 'the-observations',
-      phone: '99999999',
-      campaigns: [campaign]
-    )
-  end
+  let(:campaign) { create(:campaign) }
+  let!(:client) { create(:client, campaigns: [campaign]) }
 
   describe 'associations' do
     it 'has many campaigns' do
