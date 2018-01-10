@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Discount do
-  let(:discount) do
-    Discount.create(title: 'the-discount', value: 60.00)
-  end
+  let(:discount) { create(:discount, :money) }
 
   it 'is not valid without a title' do
     discount.title = nil
