@@ -1,23 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Product do
-  let(:supplier) do
-    Supplier.create(
-      name: 'the-supplier',
-      email: 'supplier@mail.com',
-      phone: '9999999'
-    )
-  end
-
-  let(:product) do
-    Product.create(
-      title: 'the-title',
-      description: 'the-description',
-      price: 100,
-      observations: 'the-observations',
-      supplier: supplier
-    )
-  end
+  let(:supplier) { create(:supplier) }
+  let(:product) { create(:product, supplier: supplier) }
 
   it 'is not valid without a title' do
     product.title = nil

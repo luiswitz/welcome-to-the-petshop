@@ -1,14 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Service do
-  let(:service) do
-    Service.create(
-      title: 'the-title',
-      description: 'the-description',
-      price: 100,
-      observations: 'the-observations'
-    )
-  end
+  let(:service) { create(:service) }
 
   it 'is not valid without a title' do
     service.title = nil

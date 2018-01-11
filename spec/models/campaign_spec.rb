@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Campaign do
-  let(:campaign) do
-    Campaign.new(title: 'the-title', body: 'the-body')
-  end
+  let(:campaign) { create(:campaign) }
 
   it 'is not valid without a title' do
     campaign.title = nil

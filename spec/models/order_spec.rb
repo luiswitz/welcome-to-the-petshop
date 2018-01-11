@@ -1,56 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Order do
-  let(:client) do
-    Client.create(
-      name: 'the-name',
-      email: 'the@email.com',
-      observations: 'the-observations',
-      phone: '99999999'
-    )
-  end
+  let(:product) { create(:product, price: 10.0) }
+  let(:service) { create(:service, price: 15.0) }
 
-  let(:product) do
-    Product.create(
-      title: 'the-title',
-      description: 'the-description',
-      price: 10.0,
-      observations: 'the-obsercations'
-    )
-  end
+  let(:money_discount) { create(:discount, :money, value: 5.0) }
+  let(:percentual_discount) { create(:discount, :percentual, value: 50.0) }
 
-  let(:service) do
-    Service.create(
-      title: 'the-title',
-      description: 'the-description',
-      price: 15.0,
-      observations: 'the-obsercations'
-    )
-  end
-
-  let(:discount) do
-    Discount.create(
-      title: 'the-discount',
-      kind: :money,
-      value: 5.0
-    )
-  end
-
-  let(:percentual_discount) do
-    Discount.create(
-      title: 'the-percentual-discount',
-      kind: :percentual,
-      value: 50.0
-    )
-  end
-
-  let!(:order) do
-    Order.create(
-      client: client,
-      products: [product],
-      services: [service]
-    )
-  end
+  let!(:order) { create(:order, products: [product], services: [service]) }
 
   describe 'validations' do
     it 'is not valid without a client' do
@@ -90,14 +47,15 @@ RSpec.describe Order do
   describe '#apply_discount_to_total' do
     context 'money discount' do
       it 'applies the discount' do
-        order.discount = discount
+        order.discount = money_discount
         order.send(:apply_discount_to_total)
 
         expect(order.total).to eq(20.0)
       end
 
       it 'applies a discount bigger than the total' do
-        order.discount = Discount.new(title: 'the-discount', value: 50)
+        money_discount.value = 200
+        order.discount = money_discount
         order.send(:apply_discount_to_total)
 
         expect(order.total).to eq(0)
