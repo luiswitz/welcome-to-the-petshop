@@ -1,17 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Scheduling, type: :model do
-  let(:scheduling) do
-    Scheduling.new(
-      client: Client.new,
-      date: double(:date),
-      time: double(:time),
-      status: 0,
-      services: [
-        Service.new
-      ]
-    )
-  end
+  let(:service) { create(:service) }
+  let(:scheduling) { create(:scheduling, services: [service]) }
 
   describe 'associations' do
     it 'belgons to a client' do
